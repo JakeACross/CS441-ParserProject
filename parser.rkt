@@ -9,12 +9,27 @@
 ;;(read-line in)
 ;;(close-input-port in)
 
+(define templist (list "stmt" "stmtlist"))
 (define inline(file->lines "Input01.txt"))
 
 (for-each (lambda (arg)
               (printf "Got ~a\n" arg)
               23)
             inline)
+
+(define firstitem (first inline))
+(set! inline(remove firstitem inline))
+(display inline)
+(display "\n")
+
+(define item(list-ref inline 0))
+(define pusheditem(string-split item))
+(display item)
+(append pusheditem templist)
+
+
+
+
 
 
 
