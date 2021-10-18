@@ -9,8 +9,9 @@
 ;;(read-line in)
 ;;(close-input-port in)
 
+(define (parser some-file)
 (define templist (list "stmt" "stmtlist"))
-(define inline(file->lines "Input01.txt"))
+(define inline(file->lines some-file))
 
 (for-each (lambda (arg)
               (printf "Got ~a\n" arg)
@@ -25,9 +26,12 @@
 (define item(list-ref inline 0))
 (define pusheditem(string-split item))
 (display item)
-(append pusheditem templist)
+(append pusheditem templist))
 
 
+
+;;function call here
+(parser "Input01.txt")
 
 
 
