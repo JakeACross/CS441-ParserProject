@@ -12,17 +12,34 @@
      [(list-prefix? '("$$ ") lst) "Accept"]
      [else
       (define input (string-split (first lst)))
-      (println input)
+      (println stack)
       (cond
         [(list-prefix? '("read") input)
-         (set! stack (append(list "read" "id") stack))
-         (if (< (length input) 3) (llp (rest lst) (+ len 1)) (error "Syntax error found on line " (~a len)))
-         ]
-        [(list-prefix? '("write") input)
-         (set! stack (append(list "write" "expr") stack))
+         (set! stack (append(list "id") stack))
+         (define (recursion lst)
+           (cond
+            [(list-prefix? '("id") stack)
+             (cond
+               [(string->number (first lst))
+                (error "Syntax error found on line" len)]
+               [else
+                (set! stack (rest stack))
+               
+                ]
+               )
+             ]
+            )
+           )
+         (recursion (rest input))
          (llp (rest lst) (+ len 1))
          ]
-        [else  (llp (rest lst) (+ len 1))]
+        [(list-prefix? '("write") input)
+         (set! stack (append(list "expr") stack))
+         (llp (rest lst) (+ len 1))
+         ]
+        [else  
+         (set! stack (append(list ":=" "expr") stack))
+         (llp (rest lst) (+ len 1))]
         )
       ]))
 
@@ -37,6 +54,8 @@
 
 ;function call here
 (parser "Input03.txt")
+(define inlist(file->lines "Input01.txt"))
+(string? (list-ref inlist 0))
 
 
 ;(define inlist(file->list "Input01.txt"))
