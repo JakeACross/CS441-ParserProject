@@ -1,4 +1,4 @@
-read 15  
+read A 
 read B 
 write (A + 1) * ((B - 2) + A - (B * A)))))))
 $$ 
