@@ -14,8 +14,6 @@
       (define input (string-split (first lst)))
       ;local function recursion:
       (define (recursion item)
-        (println stack)
-        (println item)
         (cond
             [(list-prefix? '("id") stack)
              (cond
